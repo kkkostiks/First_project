@@ -1,0 +1,38 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+
+{% block title %}
+    {{ book_card.title }}
+{% endblock %}
+
+{% block header %}
+    {% if user.is_authenticated %}
+        <div class="logout-container">
+            <a href="{% url 'logout' %}" class="logout">Вийти з акаунту</a>
+        </div>
+    {% endif %}
+{% endblock header %}
+
+{% block main %}
+    {% if user.is_authenticated %}
+        <div class="home-container">
+            <div class="home-button">
+                <a href="{% url 'home' %}" class="home-link">Назад</a>
+            </div>
+        </div>
+        <div class="card">
+            <img src="{{ book_card.foto.url }} " alt="Фото книги" class="book-foto-card">
+            <h1 class="book-title">{{ book_card.title }}</h1>
+            <h2 class="book-author">{{ book_card.author }}</h2>
+            <h2 class="book-date">{{ book_card.year }}</h2>
+            <p class="book-description">
+                {{ book_card.text }}
+            </p>
+            <h4 class="book-date-add">Книгу було додано: <span>{{ book_card.datetime }}</span></h4>
+        </div>
+        <div class="card-settings">
+            <a href="{% url 'book-card-update' book_card.pk %}" class="setting-button">Редагувати</a>
+            <a href="{% url 'book-card-delete' book_card.pk %}" class="delete-button">Видалити</a>
+        </div>
+    {% endif %}
+{% endblock %}

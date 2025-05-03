@@ -1,0 +1,20 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}
+    {{ book_name_delete }}
+{% endblock %}
+
+{% block main %}
+    <div class="home-container">
+        <div class="home-button">
+            <a href="{% url 'book-card' book_delete.id %}" class="home-link">Назад</a>
+        </div>
+    </div>
+    <div class="delete-book">
+        <h1 class="delete-label">Видалити книгу?</h1>
+        <form action="" method="post">
+            {% csrf_token %}
+            <button type="submit" class="submit-button"> видалити</button>
+        </form>
+    </div>
+{% endblock %}

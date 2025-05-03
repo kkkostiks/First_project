@@ -1,0 +1,28 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+
+{% block main %}
+    <div class="home-container">
+        <div class="home-button">
+            <a href="{% url 'home' %}" class="home-link">Назад</a>
+        </div>
+    </div>
+    <div class="book-save-block">
+        <h1 class="label">Додайте нову книгу</h1>
+        <form method="post" class="book-form" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.title }}
+            {{ form.author }}
+            {{ form.year }}
+            {{ form.datetime }}
+            {{ form.text}}
+            {{ form.foto }}
+            <button type="submit" class="submit-button">Зберегти</button>
+        </form>
+    </div>
+
+{% endblock %}

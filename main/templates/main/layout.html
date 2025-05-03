@@ -1,0 +1,45 @@
+{% load static %}
+<!doctype html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{%  block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+</head>
+<body>
+    <header>
+            <img src="{% static 'main/img/logo.png' %}" alt="logo" class="logo">
+            <div class="title-container">
+                <h1 class="title">Ваша бібліотека</h1>
+            </div>
+            {%  block header %}{% endblock %}
+    </header>
+    <main>
+        {% block main %}{% endblock %}
+    </main>
+    <footer class="footer">
+                    <div class="container">
+                        <h3 class="contact-text">Контакт:</h3>
+                    <a href="tel:+380935322800" class="contact-data">+380935322800</a>
+                    </div>
+                    <div class="container">
+                        <h3 class="contact-text">Пошта:</h3>
+                        <a href="mailto:info@example.com" class="contact-data">info@example.com</a>
+                    </div>
+                    <div class="container">
+                        <h3 class="contact-text">Соціальні мережі:</h3>
+                <div class="social-media-container">
+                    <a class="contact-media" href="" >
+                            <img src="{% static 'main/img/facebook_logo.png' %}" alt="" class="social-icon">
+                        </a>
+                        <a class="contact-media" href="" >
+                            <img src="{% static 'main/img/instagram_logo.png' %}" alt="" class="social-icon">
+                        </a>
+                </div>
+                    </div>
+    </footer>
+</body>
+</html>
