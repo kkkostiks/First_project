@@ -1,4 +1,4 @@
-{% extends 'main/layout.html' %}
+    {% extends 'home/layout.html' %}
 {% load static %}
 
 {% block title %}
@@ -25,9 +25,11 @@
             <h1 class="book-title">{{ book_card.title }}</h1>
             <h2 class="book-author">{{ book_card.author }}</h2>
             <h2 class="book-date">{{ book_card.year }}</h2>
-            <p class="book-description">
-                {{ book_card.text }}
-            </p>
+            <div class="book-description-block">
+                <p class="book-description">
+                    {{ book_card.text }}
+                </p>
+            </div>
             <h4 class="book-date-add">Книгу було додано: <span>{{ book_card.datetime }}</span></h4>
         </div>
         <div class="card-settings">

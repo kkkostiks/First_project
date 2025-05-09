@@ -1,4 +1,4 @@
-{% extends 'main/layout.html' %}
+{% extends 'home/layout.html' %}
 {% load static %}
 
 {%  block title %}
@@ -15,7 +15,7 @@
 
 {% block main %}
     {% if user.is_authenticated %}
-            {% if is_book == 2 or is_book == 3 %}
+            {% if search is not None or not_search %}
                 <div class="home-container">
                     <div class="home-button">
                         <a href="{% url 'home' %}" class="home-link">Назад</a>
@@ -23,18 +23,18 @@
                 </div>
             {% endif %}
                 <div class="main-container">
-                    {% if is_book == 1%}
+                    {% if search or entries%}
                         <form method="post" class="home-form">
                             {% csrf_token %}
                             {{ form.title }}
                             <button class="search-button" type="submit">
-                                <img src="{% static 'main/img/search.png' %}" alt="", class="search-icon">
+                                <img src="{% static 'home/img/search.png' %}" alt="", class="search-icon">
                             </button>
                         </form>
-                    {% elif is_book == 3%}
-                        <h1 class="mes-title">Такої книги не знайдено</h1>
-                    {% elif is_book == 0 %}
+                    {% elif not_entries %}
                         <h1 class="mes-title">Додайте свою першу книгу</h1>
+                    {% elif not_search %}
+                        <h1 class="mes-title">Такої книги не знайдено</h1>
                     {% endif %}
                 </div>
                <div class="main-block">

@@ -344,16 +344,21 @@ input::placeholder{
     margin-bottom: 0;
 }
 
-.book-description{
-    font-size: 25px;
+.book-description-block{
     margin-top: 30px;
     margin-bottom: 0;
     text-align: center;
-    max-width: 75ch;
+    max-width: 75%;
     text-overflow: ellipsis;
     border: #255459 2px solid;
     border-radius: 30px;
     background-color: #75BFB8;
+    word-wrap: break-word;
+}
+
+.book-description{
+    font-size: 25px;
+
 }
 
 .book-date-add{
