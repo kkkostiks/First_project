@@ -17,8 +17,8 @@ def registration(request):
             user.save()
             return redirect('authentication')
         else:
-            return render(request, 'registration/registration.html', { 'form': form})
-    return render(request, 'registration/registration.html', {'form': UserForm()})
+            return render(request, 'accounts/registration.html', { 'form': form})
+    return render(request, 'accounts/registration.html', {'form': UserForm()})
 
 @never_cache
 def authentication(request):
@@ -29,8 +29,8 @@ def authentication(request):
             login(request, user)
             return redirect('home')
         else:
-            return render(request, 'registration/authentication.html', { 'form': form})
-    return render(request,'registration/authentication.html', {'form' : LoginForm(),})
+            return render(request, 'accounts/authentication.html', { 'form': form})
+    return render(request,'accounts/authentication.html', {'form' : LoginForm(),})
 
 
 def logout_user(request):
