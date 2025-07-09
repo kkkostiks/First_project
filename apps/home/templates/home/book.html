@@ -11,18 +11,31 @@
             <a href="{% url 'home' %}" class="home-link">Назад</a>
         </div>
     </div>
-    <div class="book-save-block">
         <h1 class="label">Додайте нову книгу</h1>
         <form method="post" class="book-form" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form.title }}
-            {{ form.author }}
-            {{ form.year }}
-            {{ form.datetime }}
-            {{ form.text}}
-            {{ form.foto }}
+            <div class="book-form-container">
+                <div class="form-element">
+                    {{ form.title }}
+                    {{ form.author }}
+                    {{ form.publishing_house }}
+                    {{ form.language }}
+                    {{ form.count_pages }}
+                    {{ form.publish_year }}
+                    {{ form.year }}
+                </div>
+                <div class="form-element">
+                    <h1>Дата додавання книги</h1>
+                    {{ form.datetime }}
+                    {{ form.text}}
+                    <h1>Додайте фото книги</h1>
+                    {{ form.foto }}
+                    <h1>Додайте файл книги</h1>
+                    {{ form.file }}
+                </div>
+            </div>
             <button type="submit" class="submit-button">Зберегти</button>
         </form>
-    </div>
+
 
 {% endblock %}

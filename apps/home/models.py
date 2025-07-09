@@ -4,12 +4,18 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Books(models.Model):
-    title = models.CharField(max_length=100)
-    author = models.CharField(max_length=50)
+    title = models.CharField()
+    author = models.CharField()
+    publishing_house = models.CharField()
+    language = models.CharField()
+    count_pages = models.IntegerField()
+    publish_year = models.IntegerField()
     year = models.IntegerField()
     datetime = models.DateTimeField()
     text = models.TextField()
-    foto = models.ImageField(upload_to='')
+    foto = models.ImageField(upload_to='book-foto')
+    file = models.FileField(upload_to='book-file')
+
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 

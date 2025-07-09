@@ -98,7 +98,6 @@ main{
 
 .book-info-text{
     display: block;
-    line-height: 1;
 }
 
 .book-foto-block{
@@ -121,10 +120,6 @@ main{
 .about{
     text-align: center;
     font-size: 20px;
-    max-width: 25ch;
-    max-height: calc(1em * 3);
-    overflow: hidden;
-    text-overflow: ellipsis;
     color: #593A2E;
 
 }
@@ -156,6 +151,7 @@ input::placeholder{
 .main-container{
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
 
 .main-block{
@@ -211,14 +207,6 @@ input::placeholder{
 }
 
 
-.book-save-block{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-}
-
-
 .label{
     font-size: 90px;
     margin-top: 10px;
@@ -227,11 +215,18 @@ input::placeholder{
 
 .book-form{
     display: flex;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-}
+    width: 80%;
 
+}
+.book-form-container{
+    display: flex;
+    justify-content: space-evenly;
+    width: 80%;
+
+}
 
 .book-info{
     width: 300px;
@@ -250,6 +245,7 @@ input::placeholder{
     border: 2px solid #593A2E;
     background-color: #F2F2E9;
     border-radius: 50px;
+    margin-bottom: 10px;
 }
 
 .foto:focus{
@@ -370,7 +366,7 @@ input::placeholder{
 .card-settings{
     width: 95%;
     height: 100px;
-    margin-top: 30px;
+    margin: 30px 0 10px 0;
     display: flex;
     justify-content: center;
     gap: 50px;
@@ -426,7 +422,6 @@ input::placeholder{
 .home-container{
     width: 100%;
     display: flex;
-    justify-content: start;
 }
 
 .home-button{
@@ -480,18 +475,166 @@ input::placeholder{
     font-size: 50px;
     margin-top: 20px;
 }
+
+.download-book-button{
+    text-decoration: none;
+    margin: 10px;
+    font-size: 30px;
+    color: #255459;
+}
+
+.download-book-button:hover{
+    color: #A66F5B;
+    transform: scale(1.1);
+    transition: ease 300ms;
+}
+
+.page-nav{
+    margin-bottom: 20px;
+}
+
+.page-nav-text{
+    text-decoration: none;
+    margin: 20px;
+    font-size: 25px;
+    color: #255459;
+}
+
+.page-nav-text:hover{
+    color: #A66F5B;
+    transform: scale(1.1);
+    transition: ease 300ms;
+}
+
+.no-book-block{
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.form-element{
+    display: flex;
+    flex-direction: column;
+}
+
+.aside-container{
+    height: 100%;
+    width: 20%;
+    background-color: #75BFB8;
+    border-right: #255459 3px solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.main{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.home{
+    display: flex;
+    width: 100%;
+}
+
+.modal-background{
+    position: fixed;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0, 0.5);
+    width: 100%;
+    height: 150%;
+    top: -30%;
+    z-index: 100;
+}
+
+.modal{
+    background-color: #75BFB8;
+    border: #255459 2px solid;
+    display: flex;
+    border-radius: 20px;
+    justify-content: center;
+    width: 65%;
+    height: 50%;
+}
+
+.modal-button{
+    margin: 10px;
+    background-color: #75BFB8;
+    border: #255459 2px solid;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 30px;
+    color: #593A2E;
+}
+
+.modal-button:hover{
+    transition: ease 300ms;
+    transform: scale(1.03)
+}
+
+.modal-form{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.modal-form-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-input{
+    width: 200px;
+    height: 50px;
+    border-radius: 50px;
+    border: 2px solid #593A2E;
+    font-size: 20px;
+    color: #593A2E;
+    background-color: #F2F2E9;
+    text-align: center;
+    margin: 10px 5px 10px 5px;
+}
+
+.modal_number_input{
+    width: 150px;
+    height: 30px;
+    border-radius: 50px;
+    border: 2px solid #593A2E;
+    font-size: 20px;
+    color: #593A2E;
+    background-color: #F2F2E9;
+    text-align: center;
+    margin: 10px 5px 10px 5px;
+}
+
+.number-container{
+    display: flex;
+    flex-direction: row;
+}
+
 /*footer*/
 
 footer{
     background-color: #75BFB8;
     border-top: #255459 2px solid;
-    margin-top: 30px;
+
 }
 
 .social-icon{
     width: 50px;
     height: 50px;
 }
+
 
 .social-icon:hover{
     transition: ease 300ms;

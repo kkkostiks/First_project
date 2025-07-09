@@ -24,7 +24,11 @@
             <img src="{{ book_card.foto.url }} " alt="Фото книги" class="book-foto-card">
             <h1 class="book-title">{{ book_card.title }}</h1>
             <h2 class="book-author">{{ book_card.author }}</h2>
-            <h2 class="book-date">{{ book_card.year }}</h2>
+            <h2 class="book-date"> Написана в <span >{{ book_card.year }} році </span></h2>
+            <h2 class="book-date"> Рік видання: <span >{{ book_card.publish_year }}</span></h2>
+            <h2>Мова: <span>{{ book_card.language }}</span></h2>
+            <h2>Сторінок: <span>{{ book_card.count_pages }}</span></h2>
+            <h2>Видавництво: <span>{{ book_card.publishing_house }}</span></h2>
             <div class="book-description-block">
                 <p class="book-description">
                     {{ book_card.text }}
@@ -32,6 +36,7 @@
             </div>
             <h4 class="book-date-add">Книгу було додано: <span>{{ book_card.datetime }}</span></h4>
         </div>
+        <a href="{{ book_card.file.url }}" target="_blank" class="download-book-button">Завантажити книгу</a>
         <div class="card-settings">
             <a href="{% url 'book-card-update' book_card.pk %}" class="setting-button">Редагувати</a>
             <a href="{% url 'book-card-delete' book_card.pk %}" class="delete-button">Видалити</a>

@@ -15,71 +15,132 @@
 
 {% block main %}
     {% if user.is_authenticated %}
-            {% if search is not None or not_search %}
-                <div class="home-container">
-                    <div class="home-button">
-                        <a href="{% url 'home' %}" class="home-link">Назад</a>
-                    </div>
-                </div>
-            {% endif %}
-                <div class="main-container">
-                    {% if search or entries%}
-                        <form method="post" class="home-form">
-                            {% csrf_token %}
-                            {{ form.title }}
-                            <button class="search-button" type="submit">
-                                <img src="{% static 'home/img/search.png' %}" alt="", class="search-icon">
-                            </button>
-                        </form>
-                    {% elif not_entries %}
-                        <h1 class="mes-title">Додайте свою першу книгу</h1>
-                    {% elif not_search %}
-                        <h1 class="mes-title">Такої книги не знайдено</h1>
-                    {% endif %}
-                </div>
-               <div class="main-block">
-                {% if books %}
-                   {% for book in books %}
-                           <a href="{% url 'book-card' book.pk %}" class="card-link">
-                        <div class="book-block">
-                            <div class="book-foto-block">
-                                <img src="{{ book.foto.url }}" alt="book-foto" class="book-foto">
-                            </div>
-                            <div class="book-info-block">
-                                <div class="book-info-text">
-                                    <h2 class="name">{{ book.title }}</h2>
-                                    <h2 class="author">{{ book.author }}</h2>
-                                    <p class="about">
-                                        {{ book.text }}
-                                    </p>
-                                </div>
+            <div id="id01" class="modal-background">
+                <button class="modal-button" onclick="document.getElementById('id01').style.display='none'">Х</button>
+                <div class="modal">
+                    <form method  ="post" class="modal-form">
+                        {% csrf_token %}
+                        <div class="modal-form-container">
+                            {{ form.term }}
+                            <h2>Введіть видавництво</h2>
+                            {{ form.publishing_house }}
+                            <h2>Введіть кількість сторінок від</h2>
+                            <div class="number-container">
+                                {{ form.count_pages_from }}
+                                <h2>до</h2>
+                                {{ form.count_pages_to }}
                             </div>
                         </div>
-                       </a>
-                   {% endfor %}
+                        <div class="modal-form-container">
+                            <h2>Введіть рік видавництва від</h2>
+                            <div class="number-container">
+                                {{ form.publish_year_from }}
+                                <h2>до</h2>
+                                {{ form.publish_year_to }}
+                            </div>
+                            <h2>Введіть рік написання книжки від</h2>
+                            <div class="number-container">
+                                {{ form.year_from }}
+                                <h2>до</h2>
+                                {{ form.year_to }}
+                            </div>    
+                            <h2>Введіть дату додавання книжки від</h2>
+                            <div class="number-container">
+                                {{ form.datetime_from }}
+                                <h2>до</h2>
+                                {{ form.datetime_to }}
+                            </div>   
+                        </div>
+                        <button class="search-button" type="submit">
+                                        <img src="{% static 'home/img/search.png' %}" alt="" class="search-icon">
+                        </button>
+                    </form>  
+                </div>
+            </div>
+            <div class="home">
+                <div class="main">
+                    {% if request.method == 'POST' %}
+                        <div class="home-container">
+                            <div class="home-button">
+                                <a href="{% url 'home' %}" class="home-link">Назад</a>
+                            </div>
+                        </div>
                     {% endif %}
-                   <div class="add-container">
-                       <a href="{% url 'book' %}" class="add-link">+</a>
-                   </div>
-               </div>
+                        <div class="main-container">
+                            {% if not books and not request.method == 'POST' %}
+                                <h1 class="mes-title">Додайте свою першу книгу</h1>
+                            {% else %}
+                                <form method="post" class="home-form">
+                                    {% csrf_token %}
+                                    {{ form.term }}
+                                    <button class="search-button" type="submit">
+                                        <img src="{% static 'home/img/search.png' %}" alt="" class="search-icon">
+                                    </button>
+                            </form>
+                            <button class="modal-button" onclick="document.getElementById('id01').style.display='flex'">Додаткові параметри пошуку</button>
+                            {% endif %}
+                        </div>
+                       <div class="main-block">
+                           {% for book in page_obj %}
+                                   <a href="{% url 'book-card' book.pk %}" class="card-link">
+                                <div class="book-block">
+                                    <div class="book-foto-block">
+                                        <img src="{{ book.foto.url }}" alt="book-foto" class="book-foto">
+                                    </div>
+                                    <div class="book-info-block">
+                                        <div class="book-info-text">
+                                            <h2 class="name">{{ book.title }}</h2>
+                                            <h2 class="author">{{ book.author }}</h2>
+                                            <p class="about">
+                                                {{ book.publishing_house }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                               </a>
+                           {% empty %}
+                                <div class="no-book-block">
+                                     <h1 class="mes-title">Такої книги не знайдено</h1> <br>
+                                </div>
+                                  
+                               
+                           {% endfor %}
+                           <div class="add-container">
+                               <a href="{% url 'book' %}" class="add-link">+</a>
+                           </div>
+                       </div>
+                        <h2 ><span>{{ page_obj.number }}</span> Сторінка з <span>{{ page_obj.paginator.num_pages }}</span></h2>
+                        {% if page_obj.paginator.num_pages > 1 %}
+                            <div class="page-nav">
+                            {% if page_obj.has_previous %}
+                                <a href="?page={{ page_obj.previous_page_number }}" class="page-nav-text">Назад</a>
+                            {% endif %} 
+                            {% if page_obj.has_next %}
+                                <a href="?page={{ page_obj.next_page_number }}" class="page-nav-text">Вперед</a>
+                            {% endif %} 
+                            </div>
+                        {% endif %}    
+                </div>
             </div>
     {% else %}
-            <div class="auth-container">
-                {% if messages %}
-                            {% for message in messages %}
-                                <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
-                                    {{ message }}<br/>
-                                </div>
-                            {% endfor %}
-                {% endif %}
-                <h1 class="auth-text">Щоб знайти книгу
-                <span >
-                    <a href="{% url 'registration' %}" class="auth">зареєструйтеся</a>
-                </span>
-                або
-                <span >
-                    <a href="{% url 'authentication' %}" class="auth">увійдіть</a>
-                </span></h1>
-
+                    <div class="auth-container">
+                        {% if messages %}
+                                    {% for message in messages %}
+                                        <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
+                                            {{ message }}<br/>
+                                        </div>
+                                    {% endfor %}
+                        {% endif %}
+                        <h1 class="auth-text">Щоб знайти книгу
+                        <span >
+                            <a href="{% url 'registration' %}" class="auth">зареєструйтеся</a>
+                        </span>
+                        або
+                        <span >
+                            <a href="{% url 'authentication' %}" class="auth">увійдіть</a>
+                        </span></h1>
+        
+                  
+        
     {% endif %}
 {% endblock main %}
